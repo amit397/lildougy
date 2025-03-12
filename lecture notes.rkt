@@ -51,3 +51,39 @@
 ;if I want to do recursion then I have to start off with how i can make the problem into
 ;a divide and conquer problem: find a related smaller problem that will consistently be broken
 ;up and solved
+
+
+;3/10
+(define (accumulate op init seq)
+  (cond ((null? seq) init)
+        (else (op (car seq)
+                  (accumulate op init (cdr seq))))))
+(define (op x y)
+  (if (pred x)
+      (cons x y)
+      y))
+;Use map and accumulate to add 1 to a list of integers
+;@ operator -> (_ @ _)
+;  :^)
+;/(.|.)\
+;   |
+;  / \
+
+;inductive definitions enable structural induction by providing a definition of proper
+;componenets
+
+; for a structural induction, we a ssume that the result (whatever it is)
+;is true for proper components and then argue that it holds for the entire assemblage
+;of those components
+
+;talking about some constructer shit no clue whats going on, review notes
+;ex:
+(define @-exp? (lambda (e)
+                 (eq? (operator e) '@)))
+
+;recursive descent, syntax directed evaluation
+
+;Self study notes
+;Tree Induction: Induct on the car cdr structure of the tree
+;IH: assume the result for both car and cdr
+;IS: Argue the program does the right thing with the car and cdr
