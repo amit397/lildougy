@@ -87,3 +87,35 @@
 ;Tree Induction: Induct on the car cdr structure of the tree
 ;IH: assume the result for both car and cdr
 ;IS: Argue the program does the right thing with the car and cdr
+
+;3/17
+;last question of 3.5, can use map to obtain the first rown
+
+;Write a program to compute P(x) of a set, ie the set of all subsets of set x
+
+(define (power-set x)
+  (cond ((null? x) (list x))
+        (else (let ((s (power-set (cdr x))))
+                (append s (map (lambda (y) (cons (car x) y))
+                               s))))))
+;Use this to develop reasoning for divide and conquer
+
+;office hours
+
+;replace nth occurance of a with b in a tree
+;utilize global variable to count a
+;utilize let to gurantee ordr of travesal
+
+(define (height t)
+  (cond ((null? t) 0)
+        ((atom? t) 0)
+        (else
+         (max (+1 (height (car t)))
+              (height (cdr t)))))) ;solution troeger wrote
+;deep reverse question
+;(reverse (map deep-reverse '(t1...tn))) where t1...tn are subtrees of t
+;snoc
+;iterative tree program section 18
+
+;sorted(N)=combine(sorted(nys), as)
+;not yet sorted, already sorted integer N
