@@ -1,0 +1,20 @@
+;Create a bfs function that goes through a tree and returns whether or not a integer exists within a specific tree
+
+;Design Idea: TO create a bfs function we need a way to iterate through the tree in level order traversal, we will do this by creating list that we will call a q, where we will add the left and right roots
+;of a node of the tree and add it back to the list q to be processed. The bfs function will first, however, check if its is at the bottom of the tree by checking whether or not it's null then assigning the variable node
+;to represent the car of q and rest to the cdr of q (rest of the list). This is where the function will check 
+
+(define (bfs q n)
+  (if (null? q)
+      #f
+      (let ((node (car q))
+            (rest (cdr q)))
+        (if (eq? node n)
+            #t
+        (if (pair? node)
+            (let ((left (cadr node))
+                  (right (caddr node)))
+              (bfs (append rest (list left right)) n))
+            (bfs rest n))))))
+
+(bfs '(13 (5 6 1) (45 7 18)) 19)
